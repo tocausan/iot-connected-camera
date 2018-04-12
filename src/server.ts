@@ -15,6 +15,8 @@ new class {
     app: any;
 
     constructor() {
+
+
         this.port = Config.server.port.toString();
         this.createServer();
         console.log('Listening on port ' + this.port);
