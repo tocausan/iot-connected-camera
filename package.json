@@ -1,0 +1,65 @@
+{
+  "name": "express-typescript",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./build/app",
+    "build": "rimraf /build && gulp",
+    "dev": "concurrently --kill-others 'npm run build' 'nodemon'"
+  },
+  "description": "ExpressJs generated seed in Typescript and connected to MongoDb",
+  "main": "./build/app",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/tocausan/express-typescript-mongodb-seed.git"
+  },
+  "keywords": [
+    "expressjs",
+    "typescript"
+  ],
+  "author": "tocausan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tocausan/express-typescript-mongodb-seed/issues"
+  },
+  "homepage": "https://github.com/tocausan/express-typescript-mongodb-seed#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.3",
+    "ejs": "^2.5.8",
+    "express": "^4.16.3",
+    "morgan": "^1.9.0"
+  },
+  "devDependencies": {
+    "@types/colors": "^1.2.1",
+    "@types/cookie-parser": "^1.4.1",
+    "@types/debug": "0.0.30",
+    "@types/ejs": "^2.5.0",
+    "@types/express": "^4.11.1",
+    "@types/http-errors": "^1.6.1",
+    "@types/morgan": "^1.7.35",
+    "@types/node": "^9.6.2",
+    "@types/nodemailer": "^4.6.0",
+    "@types/shelljs": "^0.7.8",
+    "app-root-path": "^2.0.1",
+    "clean-webpack-plugin": "^0.1.19",
+    "concurrently": "^3.5.1",
+    "google-auth-library": "^1.4.0",
+    "googleapis": "^27.0.0",
+    "gulp": "^3.9.1",
+    "gulp-ignore": "^2.0.2",
+    "gulp-livereload": "^3.8.1",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-typescript": "^4.0.2",
+    "gulp-util": "^3.0.8",
+    "http": "0.0.0",
+    "nodemailer": "^4.6.4",
+    "nodemon": "^1.17.3",
+    "process": "^0.11.10",
+    "rimraf": "^2.6.2",
+    "shelljs": "^0.8.1",
+    "shipit-cli": "^4.0.2",
+    "shipit-deploy": "^4.0.2",
+    "tiny-lr": "^1.1.1",
+    "typescript": "^2.8.1"
+  }
+}
