@@ -24,8 +24,6 @@ export class HttpServer {
         this.port = parseInt(process.env.PORT) || Config.http.port;
         this.address = 'http://' + this.host + ':' + this.port;
         benchmark.pushLine('host', this.address, true);
-
-        this.createServer();
         this.testServer()
             .then(() => benchmark.display())
             .catch(() => benchmark.display());
