@@ -1,5 +1,6 @@
 'use strict';
 
+import 'colors';
 import * as http from 'http';
 import * as express from 'express';
 import * as path from 'path';
@@ -7,19 +8,27 @@ import * as bodyParser from "body-parser";
 import * as cookieParser from 'cookie-parser';
 import * as logger from 'morgan';
 import * as ejs from 'ejs';
-import {Config} from "./config";
-import {Routes} from "./routes";
+import {Config} from "../config";
+import {Routes} from "../http/routes";
+import {Benchmark} from "./Benchmark";
 
-new class {
-    port: string;
-    app: any;
+export class HttpClient {
+    private benchmark: Benchmark;
+    public host: string;
+    public port: number;
+    public address: string;
 
     constructor() {
+        this.benchmark = new Benchmark('HttpClient');
+        this.host = Config.rtc.host;
+        this.port = parseInt(process.env.PORT) || Config.web.port;
+        this.address = 'http://' + this.host + ':' + this.port;
+        this.benchmark.pushLine('host', this.address, true);
 
-
-        this.port = Config.server.port.toString();
         this.createServer();
-        console.log('Listening on port ' + this.port);
+        this.testServer()
+            .then(() => this.benchmark.display())
+            .catch(() => this.benchmark.display());
     }
 
     createApp() {
@@ -41,6 +50,19 @@ new class {
         return http.createServer(this.createApp())
             .listen(this.port)
             .on('error', this.onError);
+    }
+
+    testServer() {
+        return new Promise((resolve, reject) => {
+            try {
+                http.get(this.address, (result) => {
+                    this.benchmark.pushLine('test connection', result.statusCode.toString(), true);
+                    resolve();
+                });
+            } catch (e) {
+                reject(e);
+            }
+        });
     }
 
     onError(error: any) {

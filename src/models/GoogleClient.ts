@@ -8,7 +8,7 @@ import * as path from "path";
 
 const {google} = require('googleapis');
 
-
+/*
 const http = require('http');
 const url = require('url');
 const querystring = require('querystring');
@@ -68,7 +68,7 @@ class SampleClient {
         });
     }
 }
-
+*/
 
 export class GoogleClient {
 

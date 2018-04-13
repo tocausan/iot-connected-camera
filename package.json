@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./build/server",
+    "start": "node ./build/app",
     "build": "rimraf /build && gulp",
     "dev": "concurrently --kill-others 'npm run build' 'nodemon'"
   },
   "description": "ExpressJs generated seed in Typescript and connected to MongoDb",
-  "main": "./build/server",
+  "main": "./build/app",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/tocausan/pi-security.git"
@@ -24,10 +24,12 @@
   },
   "homepage": "https://github.com/tocausan/pi-security#readme",
   "dependencies": {
+    "@types/ws": "^4.0.2",
     "cookie-parser": "^1.4.3",
     "ejs": "^2.5.8",
     "express": "^4.16.3",
-    "morgan": "^1.9.0"
+    "morgan": "^1.9.0",
+    "ws": "^5.1.1"
   },
   "devDependencies": {
     "@types/colors": "^1.2.1",
@@ -60,6 +62,7 @@
     "shipit-cli": "^4.0.2",
     "shipit-deploy": "^4.0.2",
     "tiny-lr": "^1.1.1",
-    "typescript": "^2.8.1"
+    "typescript": "^2.8.1",
+    "xmlhttprequest": "^1.8.0"
   }
 }

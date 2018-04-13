@@ -2,29 +2,28 @@
 
 import 'colors';
 import * as shell from 'shelljs';
-
-const text = {
-    error: {
-        requireGit: 'Sorry, this script requires git'.red.bold
-    }
-};
+import {Benchmark} from "./Benchmark";
 
 export class Host {
+    private benchmark: Benchmark;
     public ip: string;
     public hostname: string;
     public host: string;
 
     constructor() {
+        this.benchmark = new Benchmark('Host');
         this.check();
         this.getInfos();
 
-        setTimeout(() => this.displayInfos(), 1000);
+        this.benchmark.pushLine('hostname', this.hostname, true);
+        this.benchmark.pushLine('host', this.host, true);
+        this.benchmark.pushLine('ip', this.ip, true);
+        this.benchmark.display();
     }
 
     private check() {
         if (!shell.which('git')) {
-            shell.echo(text.error.requireGit);
-            shell.exit(1);
+            this.benchmark.pushLine('git', 'Sorry, this script requires git', false);
         }
     }
 
@@ -43,15 +42,5 @@ export class Host {
         this.hostname = hostname.slice(0, hostname.length - 2);
         this.ip = ip.slice(0, ip.length - 2);
         this.host = host.slice(0, host.length - 2);
-    }
-
-    public displayInfos() {
-        const text = [
-            this.hostname.green.bold,
-            this.ip.green.bold,
-            this.host.green.bold,
-        ].join('\n');
-        console.log(text);
-        return text;
     }
 }
