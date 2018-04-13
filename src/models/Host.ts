@@ -4,30 +4,30 @@ import 'colors';
 import * as shell from 'shelljs';
 import {Benchmark} from "./Benchmark";
 
+const benchmark: Benchmark = new Benchmark('Host')
+
 export class Host {
-    private benchmark: Benchmark;
-    public ip: string;
     public hostname: string;
-    public host: string;
+    public ip: string;
+    public os: string;
 
     constructor() {
-        this.benchmark = new Benchmark('Host');
         this.check();
-        this.getInfos();
+        this.setData();
 
-        this.benchmark.pushLine('hostname', this.hostname, true);
-        this.benchmark.pushLine('host', this.host, true);
-        this.benchmark.pushLine('ip', this.ip, true);
-        this.benchmark.display();
+        benchmark.pushLine('hostname', this.hostname, true);
+        benchmark.pushLine('ip', this.ip, true);
+        benchmark.pushLine('os', this.os, true);
+        benchmark.display();
     }
 
     private check() {
         if (!shell.which('git')) {
-            this.benchmark.pushLine('git', 'Sorry, this script requires git', false);
+            benchmark.pushLine('git', 'Sorry, this script requires git', false);
         }
     }
 
-    private getInfos() {
+    private setData() {
         const regex: RegExp = new RegExp('\n', 'g'),
             ip: string = shell.exec('ifconfig | grep -o \'[0-9]\\{1,3\\}\\.[0-9]\\{1,3\\}\\.[0-9]\\{1,3\\}\\.[0-9]\\{1,3\\}\'')
                 .toString()
@@ -41,6 +41,6 @@ export class Host {
 
         this.hostname = hostname.slice(0, hostname.length - 2);
         this.ip = ip.slice(0, ip.length - 2);
-        this.host = host.slice(0, host.length - 2);
+        this.os = host.slice(0, host.length - 2);
     }
 }

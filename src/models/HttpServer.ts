@@ -12,23 +12,23 @@ import {Config} from "../config";
 import {Routes} from "../routes";
 import {Benchmark} from "./Benchmark";
 
+const benchmark: Benchmark = new Benchmark('HttpServer');
+
 export class HttpServer {
-    private benchmark: Benchmark;
     public host: string;
     public port: number;
     public address: string;
 
     constructor() {
-        this.benchmark = new Benchmark('HttpServer');
-        this.host = Config.rtc.host;
-        this.port = parseInt(process.env.PORT) || Config.web.port;
+        this.host = Config.http.host;
+        this.port = parseInt(process.env.PORT) || Config.http.port;
         this.address = 'http://' + this.host + ':' + this.port;
-        this.benchmark.pushLine('host', this.address, true);
+        benchmark.pushLine('host', this.address, true);
 
         this.createServer();
         this.testServer()
-            .then(() => this.benchmark.display())
-            .catch(() => this.benchmark.display());
+            .then(() => benchmark.display())
+            .catch(() => benchmark.display());
     }
 
     createApp() {
@@ -56,7 +56,7 @@ export class HttpServer {
         return new Promise((resolve, reject) => {
             try {
                 http.get(this.address, (result) => {
-                    this.benchmark.pushLine('test connection', result.statusCode.toString(), true);
+                    benchmark.pushLine('test connection', result.statusCode.toString(), true);
                     resolve();
                 });
             } catch (e) {
@@ -81,6 +81,6 @@ export class HttpServer {
                 throw error;
         }
     }
-};
+}
 
 
