@@ -6,6 +6,7 @@ import {Camera, Host, HttpServer, Socket} from "./models";
 import {Config} from "./config";
 
 const host = new Host(),
+    webServer = new HttpServer().createServer(),
     socket = new Socket(),
     wsServer = socket.createServer(exec);
 

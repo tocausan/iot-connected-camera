@@ -31,7 +31,7 @@ export class HttpServer {
             .catch(() => benchmark.display());
     }
 
-    createApp() {
+    private createApp() {
         return express()
             .set('port', this.port)
             .set('views', path.join(__dirname, 'views'))
@@ -46,13 +46,13 @@ export class HttpServer {
             .use(Routes)
     }
 
-    createServer() {
+    public createServer() {
         return http.createServer(this.createApp())
             .listen(this.port)
             .on('error', this.onError);
     }
 
-    testServer() {
+    private testServer() {
         return new Promise((resolve, reject) => {
             try {
                 http.get(this.address, (result) => {
@@ -65,7 +65,7 @@ export class HttpServer {
         });
     }
 
-    onError(error: any) {
+    private onError(error: any) {
         if (error.syscall !== 'listen') throw error;
         const bind = typeof this.port === 'string' ? 'Pipe ' + this.port : 'Port ' + this.port;
         switch (error.code) {
