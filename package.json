@@ -1,5 +1,5 @@
 {
-  "name": "express-typescript",
+  "name": "iot-pi-camera",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -7,11 +7,11 @@
     "build": "rimraf /build && gulp",
     "dev": "concurrently --kill-others 'npm run build' 'nodemon'"
   },
-  "description": "ExpressJs generated seed in Typescript and connected to MongoDb",
+  "description": "Connected camera app for Rasberry Pi",
   "main": "./build/app",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/tocausan/pi-security.git"
+    "url": "git+ssh://git@github.com/tocausan/iot-pi-camera.git"
   },
   "keywords": [
     "expressjs",
@@ -20,9 +20,9 @@
   "author": "tocausan",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/tocausan/pi-security/issues"
+    "url": "https://github.com/tocausan/iot-pi-camera/issues"
   },
-  "homepage": "https://github.com/tocausan/pi-security#readme",
+  "homepage": "https://github.com/tocausan/iot-pi-camera#readme",
   "dependencies": {
     "@types/ws": "^4.0.2",
     "cookie-parser": "^1.4.3",
@@ -59,10 +59,7 @@
     "process": "^0.11.10",
     "rimraf": "^2.6.2",
     "shelljs": "^0.8.1",
-    "shipit-cli": "^4.0.2",
-    "shipit-deploy": "^4.0.2",
     "tiny-lr": "^1.1.1",
     "typescript": "^2.8.1",
-    "xmlhttprequest": "^1.8.0"
   }
 }

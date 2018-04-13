@@ -1,18 +1,26 @@
 'use strict';
 
-import {Host, HttpClient, WsClient} from "./models";
+import 'colors';
+import {Host, HttpServer, WsServer} from "./models";
 
 new class {
     host: Host;
-    httpClient: HttpClient;
-    wsClient: WsClient;
+    httpServer: HttpServer;
+    wsServer: WsServer;
 
     constructor() {
         process.title = 'pi-security';
 
         this.host = new Host();
-        this.httpClient = new HttpClient();
-        this.wsClient = new WsClient();
+        this.httpServer = new HttpServer();
+        this.wsServer = new WsServer();
+
+        this.wsServer.server.on('connection', (ws: any) => {
+            ws.on('message', (message: any) => {
+                console.log(message.toString().blue.bold);
+            })
+        });
+
     }
 
 };

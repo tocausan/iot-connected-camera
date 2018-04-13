@@ -1,12 +1,12 @@
-# Pi Security
+# IoT Pi Camera
 
-Security server for Raspberry Pi device.
+Connected camera app for Rasberry Pi
 
 ## Installation
 ```text
 # clone this repo
-git clone git@github.com:tocausan/pi-security.git
-cd pi-security
+git clone git@github.com:tocausan/iot-pi-camera.git
+cd iot-pi-camera
 
 # install packages
 npm install

@@ -12,14 +12,14 @@ import {Config} from "../config";
 import {Routes} from "../routes";
 import {Benchmark} from "./Benchmark";
 
-export class HttpClient {
+export class HttpServer {
     private benchmark: Benchmark;
     public host: string;
     public port: number;
     public address: string;
 
     constructor() {
-        this.benchmark = new Benchmark('HttpClient');
+        this.benchmark = new Benchmark('HttpServer');
         this.host = Config.rtc.host;
         this.port = parseInt(process.env.PORT) || Config.web.port;
         this.address = 'http://' + this.host + ':' + this.port;

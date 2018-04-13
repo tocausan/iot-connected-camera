@@ -2,5 +2,5 @@
 
 export * from './Benchmark';
 export * from './Host';
-export * from './HttpClient';
-export * from './WsClient';
+export * from './HttpServer';
+export * from './WsServer';
