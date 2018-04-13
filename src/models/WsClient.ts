@@ -1,5 +1,5 @@
 import * as webSocket from 'ws';
-import {Config} from "../config";
+import {Config} from "../../hidden/config";
 import {Benchmark} from "./Benchmark";
 
 export class WsClient {

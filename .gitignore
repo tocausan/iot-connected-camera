@@ -6,3 +6,6 @@
 package-lock.json
 node_modules
 build/*
+src/config.ts
+
+hidden/*

@@ -8,7 +8,7 @@ import * as bodyParser from "body-parser";
 import * as cookieParser from 'cookie-parser';
 import * as logger from 'morgan';
 import * as ejs from 'ejs';
-import {Config} from "../config";
+import {Config} from "../../hidden/config";
 import {Routes} from "../http/routes";
 import {Benchmark} from "./Benchmark";
 
