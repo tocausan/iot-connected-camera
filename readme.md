@@ -1,11 +1,12 @@
-# Express Typescript
+# Pi Security
 
-Express starter in Typescript using Gulp compilation.
+Security server for Raspberry Pi device.
 
 ## Installation
 ```text
 # clone this repo
-git clone git@github.com:tocausan/express-typescript.git
+git clone git@github.com:tocausan/pi-security.git
+cd pi-security
 
 # install packages
 npm install
@@ -15,4 +16,7 @@ npm build
 
 # run server
 npm start
+
+# run dev mode
+npm run dev
 ```
