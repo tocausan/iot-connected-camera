@@ -2,12 +2,15 @@
 
 import 'colors';
 import * as webSocket from 'ws';
-import {Host, HttpServer, Socket} from "./models";
+import {Camera, Host, HttpServer, Socket} from "./models";
 import {Config} from "./config";
 
 const host = new Host(),
     socket = new Socket(),
     wsServer = socket.createServer(exec);
+
+new Camera().takeImage();
+
 
 function exec(message: string, client: webSocket) {
     const commands = [
