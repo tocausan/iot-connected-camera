@@ -27,7 +27,7 @@ export class HttpServer {
         this.testServer()
             .then(() => benchmark.display())
             .catch(() => benchmark.display());
-    }
+        }
 
     private createApp() {
         return express()
@@ -40,7 +40,7 @@ export class HttpServer {
             .use(bodyParser.json())
             .use(bodyParser.urlencoded({extended: false}))
             .use(cookieParser())
-            .use(express.static(path.join(__dirname, 'public')))
+            .use(express.static(path.join(__dirname, '../public')))
             .use(Routes)
     }
 
