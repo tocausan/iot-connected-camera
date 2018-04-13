@@ -4,8 +4,8 @@
 .DS_Store
 */.DS_Store
 package-lock.json
+hidden/*
 node_modules
 build/*
 src/config.ts
 
-hidden/*
