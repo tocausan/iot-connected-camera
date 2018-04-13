@@ -9,7 +9,7 @@ import * as cookieParser from 'cookie-parser';
 import * as logger from 'morgan';
 import * as ejs from 'ejs';
 import {Config} from "../config";
-import {Routes} from "../http/routes";
+import {Routes} from "../routes";
 import {Benchmark} from "./Benchmark";
 
 export class HttpClient {
