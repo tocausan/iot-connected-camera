@@ -55,20 +55,20 @@ export class Camera {
             });
 
             shell.exec(command.join(' '), (result: any) => {
-                //resolve([command.join(' '), result]);
-                return this.encodeBase64(imageSetup.output)
+                if (result === 127) {
+                    const base64 = this.encodeBase64(imageSetup.output);
+                    resolve(base64);
+                } else {
+                    reject(new Error('raspistill: command not found'));
+                }
             });
         });
     }
 
     public encodeBase64(path: string) {
-        return new Promise((resolve, reject) => {
-            fs.readFile(path, (result: any) => {
-                
-                console.log(result);
-                resolve(result)
-            });
-        });
+        const img = fs.readFileSync(path);
+        console.log(img);
+        return img;
     }
 }
 
