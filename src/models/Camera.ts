@@ -55,6 +55,7 @@ export class Camera {
             });
 
             shell.exec(command.join(' '), (result: any) => {
+                console.log(result);
                 if (result === 127) {
                     return this.encodeBase64(imageSetup.output)
                 } else {
