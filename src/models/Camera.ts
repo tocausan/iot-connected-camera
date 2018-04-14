@@ -65,8 +65,10 @@ export class Camera {
     }
 
     public encodeBase64(path: string) {
+        console.log(path);
         return new Promise((resolve, reject) => {
             fs.readFile(path, (err: any, result: any) => {
+                console.log(result);
                 err ? reject(err) : resolve(result);
             });
         });
