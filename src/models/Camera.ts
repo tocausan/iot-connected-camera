@@ -35,7 +35,7 @@ export class Camera {
     }
 
     public takeImage(setup?: any): Promise<any> {
-        console.log('take image');
+        console.log('taking image');
         return new Promise((resolve, reject) => {
             const imageSetup = defaultImageSetup;
             if (setup) {
@@ -56,8 +56,7 @@ export class Camera {
 
             shell.exec(command.join(' '), (result: any) => {
                 if (result === 127) {
-                    const base64 = this.encodeBase64(imageSetup.output);
-                    resolve(base64);
+                    return this.encodeBase64(imageSetup.output)
                 } else {
                     reject(new Error('raspistill: command not found'));
                 }
@@ -66,9 +65,11 @@ export class Camera {
     }
 
     public encodeBase64(path: string) {
-        const img = fs.readFileSync(path);
-        console.log(img);
-        return img;
+        return new Promise((resolve, reject) => {
+            fs.readFile(path, (err: any, result: any) => {
+                err ? reject(err) : resolve(result);
+            });
+        });
     }
 }
 
