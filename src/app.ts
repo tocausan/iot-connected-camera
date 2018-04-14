@@ -8,10 +8,8 @@ import {Config} from "./config";
 const host = new Host(),
     webServer = new HttpServer().createServer(),
     socket = new Socket(),
-    wsServer = socket.createServer(exec);
-
-new Camera().takeImage();
-
+    wsServer = socket.createServer(exec),
+    camera = new Camera();
 
 function exec(message: string, client: webSocket) {
     const commands = [
@@ -19,6 +17,7 @@ function exec(message: string, client: webSocket) {
         {command: 'host', description: 'get host informations'},
         {command: 'config', description: 'get device configurations'},
         {command: 'ping', description: 'ping device'},
+        {command: 'image', description: 'take image'},
     ];
 
     switch (message) {
@@ -33,6 +32,15 @@ function exec(message: string, client: webSocket) {
             break;
         case commands[3].command:
             client.send(JSON.stringify(new Date()));
+            break;
+        case commands[4].command:
+            camera.takeImage()
+                .then((result: any) => {
+                    client.send(JSON.stringify(result));
+                })
+                .catch((e: any) => {
+                    client.send(JSON.stringify(e));
+                });
             break;
         default:
             client.send('command not found (type "help")');
