@@ -63,9 +63,10 @@ export class Camera {
 
     public encodeBase64(path: string) {
         return new Promise((resolve, reject) => {
-            fs.readFile(path, (bitmap: any) => {
-                console.log(bitmap.toString('base64'));
-                resolve(bitmap.toString('base64'))
+            fs.readFile(path, (result: any) => {
+                
+                console.log(result);
+                resolve(result)
             });
         });
     }
