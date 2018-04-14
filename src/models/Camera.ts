@@ -34,7 +34,7 @@ export class Camera {
 
     }
 
-    public takeImage(setup?: any): Promise<any> {
+    public takeImage(setup?: any): Promise<string> {
         console.log('taking image');
         return new Promise((resolve, reject) => {
             const imageSetup = defaultImageSetup;
@@ -56,16 +56,22 @@ export class Camera {
 
             shell.exec(command.join(' '), (result: any) => {
                 console.log(result);
-                return this.encodeBase64(imageSetup.output);
+                return this.encodeBase64(imageSetup.output)
+                    .then((base64: any) => {
+                        console.log(base64);
+                        resolve(base64);
+                    })
+                    .catch((e: any) => {
+                        reject(e);
+                    });
             });
         });
     }
 
-    public encodeBase64(path: string) {
+    public encodeBase64(path: string): Promise<string> {
         console.log(path);
         return new Promise((resolve, reject) => {
             fs.readFile(path, (err: any, result: any) => {
-                console.log(result);
                 err ? reject(err) : resolve(new Buffer(result).toString('base64'));
             });
         });
