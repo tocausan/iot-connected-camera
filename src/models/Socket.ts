@@ -20,7 +20,7 @@ export class Socket {
         this.serverAddress = Config.server.socket;
         benchmark.pushLine('client address', this.clientAddress, true);
         benchmark.pushLine('server address', this.serverAddress, true);
-        benchmark.display()
+        benchmark.display();
     }
 
     createServer(exec: any) {

@@ -45,7 +45,7 @@ export class Camera {
                 imageSetup.output = setup.output ? setup.output : imageSetup.output;
             }
 
-            const command: string[] = ['raspistill'];
+            const command: string[] = ['raspistill -w 10 -h 10'];
             Object.keys(imageSetup).map((key: string) => {
                 switch (key) {
                     case 'output':
@@ -59,7 +59,7 @@ export class Camera {
                 return this.encodeBase64(imageSetup.output)
                     .then((base64: any) => {
                         console.log(base64);
-                        resolve(base64);
+                        resolve('base64,' + base64);
                     })
                     .catch((e: any) => {
                         reject(e);
