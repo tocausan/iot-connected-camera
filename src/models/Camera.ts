@@ -34,12 +34,15 @@ export class Camera {
     }
 
     public takeImage(setup?: any) {
+        console.log('take image');
         return new Promise((resolve, reject) => {
             const imageSetup = defaultImageSetup;
-            imageSetup.output = setup.output ? setup.output : imageSetup.output;
-            imageSetup.format = setup.format ? setup.format : imageSetup.format;
-            imageSetup.exposure = setup.exposure ? setup.exposure : imageSetup.exposure;
-            imageSetup.output = setup.output ? setup.output : imageSetup.output;
+            if (setup) {
+                imageSetup.output = setup.output ? setup.output : imageSetup.output;
+                imageSetup.format = setup.format ? setup.format : imageSetup.format;
+                imageSetup.exposure = setup.exposure ? setup.exposure : imageSetup.exposure;
+                imageSetup.output = setup.output ? setup.output : imageSetup.output;
+            }
 
             const command: string[] = ['raspistill'];
             Object.keys(imageSetup).map((key: string) => {
@@ -51,7 +54,7 @@ export class Camera {
             });
             console.log(command);
             shell.exec(command.join(' '), (result: any) => {
-                resolve(result);
+                resolve([command.join(' '), result]);
             });
         });
     }
