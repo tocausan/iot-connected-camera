@@ -66,7 +66,7 @@ export class Camera {
         return new Promise((resolve, reject) => {
             fs.readFile(path, (err: any, result: any) => {
                 console.log(result);
-                err ? reject(err) : resolve(result);
+                err ? reject(err) : resolve(new Buffer(result).toString('base64'));
             });
         });
     }
