@@ -4,6 +4,7 @@ import 'colors';
 import * as shell from 'shelljs';
 import * as path from "path";
 import {Config} from "../config";
+import * as fs from "fs";
 
 const image = {
         format: [[4, 3], [8, 5], [16, 9], [21, 10]],
@@ -33,7 +34,7 @@ export class Camera {
 
     }
 
-    public takeImage(setup?: any) {
+    public takeImage(setup?: any): Promise<any> {
         console.log('take image');
         return new Promise((resolve, reject) => {
             const imageSetup = defaultImageSetup;
@@ -52,9 +53,19 @@ export class Camera {
                         break;
                 }
             });
-            console.log(command);
+
             shell.exec(command.join(' '), (result: any) => {
-                resolve([command.join(' '), result]);
+                //resolve([command.join(' '), result]);
+                return this.encodeBase64(imageSetup.output)
+            });
+        });
+    }
+
+    public encodeBase64(path: string) {
+        return new Promise((resolve, reject) => {
+            fs.readFile(path, (bitmap: any) => {
+                console.log(new Buffer(bitmap).toString('base64'));
+                resolve(new Buffer(bitmap).toString('base64'))
             });
         });
     }
