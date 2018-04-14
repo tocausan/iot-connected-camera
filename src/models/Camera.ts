@@ -45,7 +45,7 @@ export class Camera {
                 imageSetup.output = setup.output ? setup.output : imageSetup.output;
             }
 
-            const command: string[] = ['raspistill -w 25 -h 25'];
+            const command: string[] = ['raspistill'];
             Object.keys(imageSetup).map((key: string) => {
                 switch (key) {
                     case 'output':
@@ -55,27 +55,11 @@ export class Camera {
             });
 
             shell.exec(command.join(' '), (result: any) => {
-                console.log(result);
-                return this.encodeBase64(imageSetup.output)
-                    .then((base64: any) => {
-                        console.log(base64);
-                        resolve('base64,' + base64);
-                    })
-                    .catch((e: any) => {
-                        reject(e);
-                    });
+                resolve(imageSetup.output);
             });
         });
     }
 
-    public encodeBase64(path: string): Promise<string> {
-        console.log(path);
-        return new Promise((resolve, reject) => {
-            fs.readFile(path, (err: any, result: any) => {
-                err ? reject(err) : resolve(new Buffer(result).toString('base64'));
-            });
-        });
-    }
 }
 
 
