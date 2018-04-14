@@ -45,7 +45,7 @@ export class Camera {
                 imageSetup.output = setup.output ? setup.output : imageSetup.output;
             }
 
-            const command: string[] = ['raspistill -w 10 -h 10'];
+            const command: string[] = ['raspistill -w 25 -h 25'];
             Object.keys(imageSetup).map((key: string) => {
                 switch (key) {
                     case 'output':
