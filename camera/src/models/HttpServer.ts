@@ -15,21 +15,19 @@ import {Benchmark} from "./Benchmark";
 const benchmark: Benchmark = new Benchmark('HttpServer');
 
 export class HttpServer {
-    public host: string;
     public port: number;
     public address: string;
 
     constructor() {
-        this.host = Config.http.host;
-        this.port = parseInt(process.env.PORT) || Config.http.port;
-        this.address = 'http://' + this.host + ':' + this.port;
+        this.port = Config.http.port;
+        this.address = 'http://' + Config.host.ip + ':' + this.port;
         benchmark.pushLine('host', this.address, true);
         this.testServer()
             .then(() => benchmark.display())
             .catch(() => benchmark.display());
-        }
+    }
 
-    private createApp() {
+    private setApp(): express.Application {
         return express()
             .set('port', this.port)
             .set('views', path.join(__dirname, 'views'))
@@ -44,13 +42,13 @@ export class HttpServer {
             .use(Routes)
     }
 
-    public createServer() {
-        return http.createServer(this.createApp())
+    public create(): http.Server {
+        return http.createServer(this.setApp())
             .listen(this.port)
             .on('error', this.onError);
     }
 
-    private testServer() {
+    private testServer(): Promise<void> {
         return new Promise((resolve, reject) => {
             try {
                 http.get(this.address, (result) => {
@@ -63,7 +61,7 @@ export class HttpServer {
         });
     }
 
-    private onError(error: any) {
+    private onError(error: any): void {
         if (error.syscall !== 'listen') throw error;
         const bind = typeof this.port === 'string' ? 'Pipe ' + this.port : 'Port ' + this.port;
         switch (error.code) {

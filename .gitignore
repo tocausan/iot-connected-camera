@@ -1,11 +1,11 @@
-.gulp*
+*/.gulp*
 .idea
 */.idea
 .DS_Store
 */.DS_Store
-package-lock.json
-hidden
-node_modules
-build/*
-src/config.ts
+*/package-lock.json
+*/hidden
+*/node_modules
+*/build/*
+*/src/config.ts
 
