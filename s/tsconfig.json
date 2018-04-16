@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "ES6",
+    "sourceMap": true,
+    "outDir": "build",
+    "noImplicitAny": true,
+    "removeComments": true
+  },
+  "awesomeTypescriptLoaderOptions": {
+  },
+  "include": [
+    "./src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "build"
+  ]
+}
